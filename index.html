@@ -13,14 +13,20 @@
         <h4>Who should pay the bill?</h4>
         <input type="text" v-model.trim="inputName" ref="content" />
         <button @click="addName">Add</button>
+        <p v-if="hasError">please input a name.</p>
         <hr />
         <div>
-          <span v-for="name of names">{{ name }} </span>
+          <span
+            v-for="(name, index) of names"
+            :key="index"
+            @click="removeName(index)"
+            >{{ name }}
+          </span>
         </div>
         <button v-if="names.length >= 2" @click="choose">Choose!</button>
       </div>
       <div v-else>
-        <h4>Looser is {{ selected}} !</h4>
+        <h4>Looser is {{ selected }} !</h4>
         <button @click="playAgain">Play again</button>
       </div>
     </div>
